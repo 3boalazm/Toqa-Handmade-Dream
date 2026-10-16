@@ -8,9 +8,11 @@ import {
   Sparkles,
   X,
 } from "lucide-react";
+import { useLocation } from "wouter";
+import BrandMark from "@/components/BrandMark";
 
 const braceletImage = "/images/bracelet.jpg";
-const orderMessage = encodeURIComponent("مرحبًا، حابة أستفسر عن سوار الخرز البنفسجي من براند أثر.");
+const orderMessage = encodeURIComponent("مرحبًا، حابة أستفسر عن سوار الخرز البنفسجي من براند تقى.");
 const whatsappLink = `https://wa.me/?text=${orderMessage}`;
 
 const pieces = [
@@ -18,18 +20,6 @@ const pieces = [
   { title: "عقد من الحكاية", note: "ألوان تختارينها بنفسك", art: "necklace" },
   { title: "سوار على ذوقك", note: "قطعة تتصمّم لك", art: "bracelet" },
 ];
-
-function BrandMark({ small = false }: { small?: boolean }) {
-  return (
-    <span className={`brand-mark${small ? " brand-mark--small" : ""}`} aria-hidden="true">
-      <svg viewBox="0 0 40 40" fill="none">
-        <path d="M20 3.5 34.5 20 20 36.5 5.5 20 20 3.5Z" />
-        <path d="M20 3.5V36.5M5.5 20H34.5M20 3.5 27.1 20 20 36.5 12.9 20 20 3.5Z" />
-        <circle cx="20" cy="20" r="2.2" />
-      </svg>
-    </span>
-  );
-}
 
 function PieceIllustration({ type }: { type: string }) {
   return (
@@ -61,6 +51,7 @@ function PieceIllustration({ type }: { type: string }) {
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [, setLocation] = useLocation();
 
   const closeMenu = () => setMenuOpen(false);
 
@@ -73,10 +64,10 @@ export default function Home() {
       </div>
 
       <header className="site-header">
-        <a className="brand-lockup" href="#home" aria-label="أثر، إلى الصفحة الرئيسية" onClick={closeMenu}>
+        <a className="brand-lockup" href="#home" aria-label="تقى، إلى الصفحة الرئيسية" onClick={closeMenu}>
           <BrandMark />
           <span className="brand-name-wrap">
-            <span className="brand-name">أثر</span>
+            <span className="brand-name">تقى</span>
             <span className="brand-caption">مجوهرات هاند ميد</span>
           </span>
         </a>
@@ -93,7 +84,7 @@ export default function Home() {
 
         <nav className={`main-nav${menuOpen ? " main-nav--open" : ""}`} aria-label="القائمة الرئيسية">
           <a href="#story" onClick={closeMenu}>حكايتنا</a>
-          <a href="#collection" onClick={closeMenu}>قطع من أثر</a>
+          <a href="#collection" onClick={closeMenu}>قطع من تقى</a>
           <a href="#details" onClick={closeMenu}>تفاصيل السوار</a>
         </nav>
 
@@ -106,7 +97,7 @@ export default function Home() {
         <section className="hero section-wrap" id="home">
           <div className="hero-copy">
             <p className="eyebrow"><span /> حكاية تُلبَس</p>
-            <h1>تفاصيل صغيرة،<br /><span>تترك أثرًا</span> كبيرًا.</h1>
+            <h1>تفاصيل صغيرة،<br /><span>تترك تقى</span> كبيرة.</h1>
             <p className="hero-description">
               إكسسوارات تُصنع باليد، وتُختار بالقلب. أحجار طبيعية وألوان هادئة تتحوّل لقطعة تشبهك.
             </p>
@@ -140,10 +131,10 @@ export default function Home() {
 
         <section className="story-section" id="story">
           <div className="story-inner section-wrap">
-            <div className="story-kicker"><BrandMark small /> حكاية أثر</div>
+            <div className="story-kicker"><BrandMark small /> حكاية تقى</div>
             <div className="story-main">
               <h2>مش مجرد إكسسوار.<br /><span>دي حكاية بتكمّل حكايتك.</span></h2>
-              <p>في «أثر» بنحب التفاصيل اللي بتحسّيها قبل ما تلاحظيها. كل قطعة بتتعمل بإيدينا، بحب واهتمام، عشان تبقى قريبة منك وتفضل فاكرة لحظة حلوة.</p>
+              <p>في «تقى» بنحب التفاصيل اللي بتحسّيها قبل ما تلاحظيها. كل قطعة بتتعمل بإيدينا، بحب واهتمام، عشان تبقى قريبة منك وتفضل فاكرة لحظة حلوة.</p>
               <a className="text-link text-link--light" href="#collection">شوفي أفكارنا <span>←</span></a>
             </div>
             <div className="story-stamp"><span>صُنع<br />بيدين<br />تحبّان</span><i>✳</i></div>
@@ -214,7 +205,7 @@ export default function Home() {
         <section className="closing-section section-wrap">
           <BrandMark />
           <p className="eyebrow"><span /> حكايتك تبدأ من هنا</p>
-          <h2>عندك فكرة؟<br /><em>خلّيها تسيب أثر.</em></h2>
+          <h2>عندك فكرة؟<br /><em>خلّيها تنبض تقى.</em></h2>
           <p className="closing-copy">احكي لنا عن لون بتحبيه، ذكرى قريبة لقلبك، أو قطعة نفسك تلبسيها.</p>
           <a className="button button--light" href={whatsappLink} target="_blank" rel="noreferrer">كلّمينا على واتساب <MessageCircle size={17} /></a>
           <span className="closing-spark closing-spark--one">✳</span>
@@ -223,10 +214,18 @@ export default function Home() {
       </main>
 
       <footer className="site-footer">
-        <a className="brand-lockup" href="#home"><BrandMark small /><span className="brand-name-wrap"><span className="brand-name">أثر</span><span className="brand-caption">مجوهرات هاند ميد</span></span></a>
+        <a className="brand-lockup" href="#home"><BrandMark small /><span className="brand-name-wrap"><span className="brand-name">تقى</span><span className="brand-caption">مجوهرات هاند ميد</span></span></a>
         <span className="footer-note">كل قطعة فيها حكاية صغيرة.</span>
         <a href="#home" className="back-to-top">للأعلى ↑</a>
-        <span className="copyright">© أثر 2026</span>
+        <span className="copyright">© تقى 2026 · Toqa</span>
+        {/* The discreet entrance to the hidden wishes page: a tiny dot at the very
+            end of the page. Only the people who know about it will notice it. */}
+        <button
+          type="button"
+          className="secret-trigger"
+          onClick={() => setLocation("/wishes")}
+          aria-label="نقطة"
+        />
       </footer>
     </div>
   );

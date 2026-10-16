@@ -25,4 +25,20 @@ export const users = mysqlTable("users", {
 export type User = typeof users.$inferSelect;
 export type InsertUser = typeof users.$inferInsert;
 
+/**
+ * Wishes left by visitors on the hidden wishes page (/wishes).
+ * The page itself is unlisted, and every read/write is gated by a shared code.
+ */
+export const wishes = mysqlTable("wishes", {
+  id: int("id").autoincrement().primaryKey(),
+  /** The wish text itself. */
+  message: text("message").notNull(),
+  /** Optional signature of the sender. */
+  name: varchar("name", { length: 80 }),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type Wish = typeof wishes.$inferSelect;
+export type InsertWish = typeof wishes.$inferInsert;
+
 // TODO: Add your tables here
