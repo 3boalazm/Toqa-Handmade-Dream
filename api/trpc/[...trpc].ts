@@ -1,7 +1,7 @@
 import express from "express";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
-import { createContext } from "../../server/_core/context";
-import { appRouter } from "../../server/routers";
+import { createContext } from "../../server/_core/context.js";
+import { appRouter } from "../../server/routers.js";
 
 /**
  * Vercel serverless entry for the tRPC API.
@@ -9,6 +9,12 @@ import { appRouter } from "../../server/routers";
  * `api/trpc/[...trpc].ts` receives every `/api/trpc/*` request (unlock, list and
  * add on the hidden wishes page, plus auth state). Runtime environment
  * variables such as `WISHES_CODE` are read from the Vercel project settings.
+ *
+ * Vercel compiles each file of this import graph separately to plain ESM and
+ * runs it with bare Node — no Vite, no tsx. So every relative import here and
+ * in `server/` must carry an explicit `.js` extension, and `@shared/*` path
+ * aliases must not be used (they only resolve through Vite/tsx). Keep it that
+ * way or the function fails to boot with ERR_MODULE_NOT_FOUND in production.
  */
 const app = express();
 app.use(express.json({ limit: "50mb" }));

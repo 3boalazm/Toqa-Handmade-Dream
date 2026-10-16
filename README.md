@@ -50,6 +50,10 @@ pnpm db:migrate
 - `vercel.json`: بيبني الواجهة بـ `pnpm build:static` والخرج في `dist/public`.
 - `api/trpc/[...trpc].ts`: الـ tRPC API كـ Serverless Function (نفس مسارات
   السيرفر المحلي بالظبط، بما فيها صفحة الأمنيات).
+- **مهم عند التعديل على ملفات `server/` أو `api/`**: فيرجيل بيترجم كل ملف لوحده
+  لـ JavaScript ويشغّله بـ Node من غير Vite. فلازم أي import نسبي يكون بامتداد
+  `.js` (مثل `./wishes.js`) وممنوع استخدام اختصارات زي `@shared/const` — دي
+  بتشتغل محليًا بس بتكسر الـ API على فيرجيل (خطأ 500).
 - `api/health.ts`: فحص بسيط `/api/health`.
 - مسارات الصفحات (`/`، `/wishes`، `/404`) بترجع `index.html` للـ SPA.
 

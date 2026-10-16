@@ -1,10 +1,10 @@
 import "dotenv/config";
 import express from "express";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
-import { appRouter } from "../routers";
-import { createContext } from "./context";
-import { registerOAuthRoutes } from "./oauth";
-import { publicPlatformScript } from "./publicConfig";
+import { appRouter } from "../routers.js";
+import { createContext } from "./context.js";
+import { registerOAuthRoutes } from "./oauth.js";
+import { publicPlatformScript } from "./publicConfig.js";
 
 /**
  * Builds the Express application (no port is bound here).
