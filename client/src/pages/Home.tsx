@@ -129,6 +129,31 @@ export default function Home() {
           </div>
         </section>
 
+        <section
+          className="project-note section-wrap"
+          aria-label="ملاحظة خاصة بالمشروع"
+          style={{ paddingTop: "1.5rem", paddingBottom: "2rem" }}
+        >
+          <div
+            style={{
+              position: "relative",
+              overflow: "hidden",
+              border: "1px dashed var(--color-plum, #76506f)",
+              borderRadius: "1.25rem",
+              padding: "1.5rem clamp(1rem, 4vw, 2.5rem)",
+              textAlign: "center",
+              background: "linear-gradient(135deg, rgba(242, 231, 239, 0.75), rgba(255, 250, 244, 0.9))",
+            }}
+          >
+            <p style={{ margin: 0, fontSize: "clamp(1.05rem, 2.5vw, 1.45rem)", lineHeight: 1.9, fontWeight: 600 }}>
+              دا هيبقى واحد من أجمل الويبسايتس بتاعة الهاند ميد في مصر كلها لو جبنا فوق الـ 80% :)
+            </p>
+            <p style={{ margin: "0.65rem 0 0", fontSize: "0.95rem", lineHeight: 1.8, opacity: 0.82 }}>
+              وأول يوم مناسب بعدها هننزل نشتري إكسسوارات ✨
+            </p>
+          </div>
+        </section>
+
         <section className="story-section" id="story">
           <div className="story-inner section-wrap">
             <div className="story-kicker"><BrandMark small /> حكاية تقى</div>
