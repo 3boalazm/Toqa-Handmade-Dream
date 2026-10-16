@@ -4,6 +4,7 @@ import path from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { TrpcContext } from "./_core/context";
 import { appRouter } from "./routers";
+import { getWishesCode, verifyWishesCode } from "./wishes";
 
 const CODE = "toqa-secret";
 const WISH_TEXT = "\u0639\u0627\u064a\u0632\u0629 \u0633\u0648\u0627\u0631 \u0628\u0646\u0633\u0641\u062c\u064a";
@@ -64,5 +65,28 @@ describe("wishes", () => {
 
     await expect(caller.wishes.add({ code: CODE, message: "  " })).rejects.toThrow();
     await expect(caller.wishes.add({ code: CODE, message: "a" })).rejects.toThrow();
+  });
+});
+
+describe("wishes code env", () => {
+  afterEach(() => {
+    vi.unstubAllEnvs();
+  });
+
+  it("falls back to the toqa code when WISHES_CODE is not set", () => {
+    vi.stubEnv("WISHES_CODE", "");
+    expect(getWishesCode()).toBe("toqa");
+    expect(verifyWishesCode("toqa")).toBe(true);
+    expect(verifyWishesCode("toqa ")).toBe(false);
+    expect(verifyWishesCode("wrong")).toBe(false);
+    expect(verifyWishesCode("")).toBe(false);
+    expect(verifyWishesCode(undefined)).toBe(false);
+  });
+
+  it("prefers an explicit WISHES_CODE over the default", () => {
+    vi.stubEnv("WISHES_CODE", "custom-code ");
+    expect(getWishesCode()).toBe("custom-code");
+    expect(verifyWishesCode("custom-code")).toBe(true);
+    expect(verifyWishesCode("toqa")).toBe(false);
   });
 });

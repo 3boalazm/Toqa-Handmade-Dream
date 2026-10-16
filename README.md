@@ -42,3 +42,29 @@ WISHES_CODE="your-own-code" pnpm dev
 ```bash
 pnpm db:migrate
 ```
+
+## النشر على Vercel
+
+المشروع جاهز للنشر على Vercel من غير أي إعدادات زيادة:
+
+- `vercel.json`: بيبني الواجهة بـ `pnpm build:static` والخرج في `dist/public`.
+- `api/trpc/[...trpc].ts`: الـ tRPC API كـ Serverless Function (نفس مسارات
+  السيرفر المحلي بالظبط، بما فيها صفحة الأمنيات).
+- `api/health.ts`: فحص بسيط `/api/health`.
+- مسارات الصفحات (`/`، `/wishes`، `/404`) بترجع `index.html` للـ SPA.
+
+### متغيرات البيئة على Vercel
+
+من **Project → Settings → Environment Variables** ضيف المتغيرات دي
+(لـ Production و Preview):
+
+| المتغير        | القيمة     | إجباري؟                                              |
+| -------------- | ---------- | ---------------------------------------------------- |
+| `WISHES_CODE`  | `toqa`     | لأ — الافتراضي في الكود `toqa` برضو، بس الأفضل تضيفه |
+| `DATABASE_URL` | رابط MySQL | اختياري — من غيره الأمنيات بتتخزن في ملف JSON مؤقت   |
+
+أهم متغير هو `WISHES_CODE` (كود فتح الصفحة السرية `/wishes`)، وقيمته المطلوبة
+`toqa`. بعد أي تعديل للمتغيرات اعمل **Redeploy** عشان القيم تتطبق.
+
+> ملاحظة: حتى لو متسبش `WISHES_CODE` خالص، الكود بيرجع للقيمة الافتراضية `toqa`
+> تلقائيًا — يعني الصفحة بتتفتح بـ `toqa` في كل الأحوال.

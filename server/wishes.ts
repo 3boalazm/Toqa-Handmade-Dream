@@ -1,5 +1,6 @@
 import { createHash, timingSafeEqual } from "node:crypto";
 import fs from "node:fs/promises";
+import os from "node:os";
 import path from "node:path";
 import { desc } from "drizzle-orm";
 import { nanoid } from "nanoid";
@@ -43,7 +44,13 @@ export function verifyWishesCode(candidate: string | null | undefined): boolean 
 }
 
 function wishesFilePath(): string {
-  return process.env.WISHES_FILE?.trim() || path.join(process.cwd(), "data", "wishes.json");
+  const custom = process.env.WISHES_FILE?.trim();
+  if (custom) return custom;
+  // Serverless platforms (Vercel) only allow writes to the temp directory.
+  if (process.env.VERCEL) {
+    return path.join(os.tmpdir(), "toqa-wishes.json");
+  }
+  return path.join(process.cwd(), "data", "wishes.json");
 }
 
 function toWish(row: typeof wishes.$inferSelect): Wish {
