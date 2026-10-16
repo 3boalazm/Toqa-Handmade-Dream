@@ -34,6 +34,11 @@ async function startServer() {
     serveStatic(app);
   }
 
+  if (!process.env.WISHES_CODE?.trim()) {
+    console.warn(
+      "[Wishes] WISHES_CODE is not set - the hidden wishes page falls back to the default code. Set it before going live.",
+    );
+  }
   const port = Number(process.env.PORT || "3000");
   if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error("Invalid PORT");
   server.on("error", error => { console.error("Server failed:", error.message); process.exit(1); });

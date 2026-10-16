@@ -372,3 +372,91 @@ button { font: inherit; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
 }
+
+/* ------------------------------------------------------------------
+   The discreet dot at the very end of the footer.
+   It is the entrance to the hidden wishes page.
+   ------------------------------------------------------------------ */
+.secret-trigger {
+  width: 7px; height: 7px; flex: 0 0 auto; padding: 0; margin-inline-start: 2px;
+  border: 0; border-radius: 50%; background: #c9bcb4; opacity: .45; cursor: pointer;
+  transition: opacity .25s ease, transform .25s ease, background .25s ease;
+}
+.secret-trigger:hover, .secret-trigger:focus-visible { opacity: 1; transform: scale(1.45); background: var(--plum); outline: none; }
+
+/* ------------------------------------------------------------------
+   Hidden wishes page
+   ------------------------------------------------------------------ */
+.wishes-shell { min-height: 100vh; display: flex; flex-direction: column; background: radial-gradient(ellipse at 50% 0%, #f4ede5 0%, var(--paper) 48%); }
+.wishes-topbar { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 0 max(22px, calc((100% - 940px)/2)); border-bottom: 1px solid #ebe5dd; background: #faf7f1c4; }
+.wishes-topbar .brand-name { font-size: 22px; }
+.wishes-topbar-note { color: #a2948f; font-size: 8px; letter-spacing: .12em; }
+.wishes-main { width: min(100% - 40px, 720px); margin: 0 auto; padding: 54px 0 74px; flex: 1; }
+.wishes-head { text-align: center; margin-bottom: 32px; }
+.wishes-head .eyebrow { justify-content: center; }
+.wishes-head h1 { margin: 4px 0 0; color: #40323a; font-family: "Noto Naskh Arabic", serif; font-size: clamp(34px, 7vw, 48px); font-weight: 600; letter-spacing: -.03em; }
+.wishes-head h1 span { color: var(--gold); }
+.wishes-sub { max-width: 420px; margin: 10px auto 0; color: #85787b; font-size: 10px; line-height: 2.1; }
+
+.wishes-panel { margin-bottom: 28px; padding: 26px 26px 28px; background: #fffdf9; border: 1px solid #ece5dd; box-shadow: 0 16px 44px #59464a0a; }
+.wishes-panel-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+.wishes-panel-head h2 { display: flex; align-items: center; gap: 8px; margin: 0; color: #493842; font-family: "Noto Naskh Arabic", serif; font-size: 19px; font-weight: 600; }
+.wishes-panel-head h2 svg { color: #b89b62; }
+.wishes-count { padding: 4px 11px; border: 1px solid #ece2da; border-radius: 999px; color: #9b8e8c; font-size: 8px; }
+
+.wishes-textarea { width: 100%; min-height: 118px; resize: vertical; padding: 14px 15px; border: 1px solid #e7dfd7; background: #fdfaf6; color: #3d3239; font-family: inherit; font-size: 11px; line-height: 2; outline: none; transition: border-color .2s ease, box-shadow .2s ease; }
+.wishes-textarea:focus, .wishes-input:focus { border-color: #c9a9bd; box-shadow: 0 0 0 3px #c9a9bd22; }
+.wishes-form-row { display: flex; align-items: center; gap: 12px; margin-top: 12px; flex-wrap: wrap; }
+.wishes-input { flex: 1 1 190px; min-width: 0; height: 42px; padding: 0 14px; border: 1px solid #e7dfd7; background: #fdfaf6; color: #3d3239; font-family: inherit; font-size: 10px; outline: none; transition: border-color .2s ease, box-shadow .2s ease; }
+.wishes-counter { color: #a2958f; font-size: 8px; }
+.wishes-form-row .button { min-height: 42px; font-size: 10px; }
+.button:disabled { opacity: .5; cursor: default; transform: none; }
+.wishes-notice { margin: 14px 0 0; color: #6f8468; font-size: 9px; }
+.wishes-error { margin: 12px 0 0; color: #a73a3a; font-size: 9px; }
+
+.wishes-board { background: #fffdf9; border: 1px solid #ece5dd; box-shadow: 0 16px 44px #59464a0a; padding: 26px 26px 28px; }
+.wishes-board-tools { display: flex; gap: 8px; }
+.wishes-quote-btn, .wishes-lock-btn { display: inline-flex; align-items: center; gap: 6px; padding: 6px 11px; border: 1px solid #e6ddd6; background: #fdfaf6; color: #7b6b72; font-size: 8px; cursor: pointer; transition: background .2s ease, color .2s ease, border-color .2s ease; }
+.wishes-quote-btn:hover, .wishes-lock-btn:hover { background: var(--plum); border-color: var(--plum); color: #fffaf7; }
+.wishes-quote-btn:disabled { opacity: .45; cursor: default; }
+.wishes-quote-btn:disabled:hover { background: #fdfaf6; border-color: #e6ddd6; color: #7b6b72; }
+
+.wishes-quote-card { position: relative; margin-bottom: 18px; padding: 21px 23px; background: #f5eef0; border: 1px solid #e6d8de; }
+.wishes-quote-mark { position: absolute; top: 4px; inset-inline-start: 15px; color: #cbb4c2; font-size: 15px; }
+.wishes-quote-card p { margin: 0; color: #4b3a44; font-family: "Noto Naskh Arabic", serif; font-size: 15px; line-height: 1.95; }
+.wishes-quote-by { display: block; margin-top: 9px; color: #96868c; font-size: 8px; }
+
+.wishes-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 11px; }
+.wishes-item { display: flex; align-items: flex-start; gap: 12px; padding: 16px 17px; background: #fdfaf6; border: 1px solid #eee7df; }
+.wishes-item-star { flex: 0 0 auto; color: #c0a671; font-size: 13px; line-height: 1.7; }
+.wishes-item-body { flex: 1; min-width: 0; }
+.wishes-item-text { margin: 0; color: #453840; font-size: 11px; line-height: 2.05; white-space: pre-wrap; overflow-wrap: anywhere; }
+.wishes-item-meta { display: flex; align-items: center; gap: 7px; margin-top: 8px; color: #a2958f; font-size: 8px; }
+.wishes-item-dot { color: #d3c6bd; }
+.wishes-copy { flex: 0 0 auto; width: 28px; height: 28px; display: grid; place-items: center; border: 1px solid #e6ddd6; background: #fffdf9; color: #9b8b90; cursor: pointer; transition: background .2s ease, color .2s ease, border-color .2s ease; }
+.wishes-copy:hover { background: var(--plum); border-color: var(--plum); color: #fffaf7; }
+.wishes-empty { margin: 0; padding: 26px 0; text-align: center; color: #9b8e8c; font-size: 10px; }
+
+.wishes-lock { max-width: 420px; margin: 7vh auto 0; padding: 40px 30px 44px; text-align: center; background: #fffdf9; border: 1px solid #ece5dd; box-shadow: 0 16px 44px #59464a0a; }
+.wishes-lock-icon { width: 44px; height: 44px; margin: 0 auto 16px; display: grid; place-items: center; border: 1px solid #e3d6de; border-radius: 50%; color: #8c667d; }
+.wishes-lock h1 { margin: 0; color: #40323a; font-family: "Noto Naskh Arabic", serif; font-size: 32px; font-weight: 600; }
+.wishes-lock > p { margin: 7px 0 22px; color: #8d8083; font-size: 10px; }
+.wishes-lock-form { display: flex; gap: 9px; }
+.wishes-lock-form input { flex: 1; min-width: 0; height: 44px; padding: 0 14px; border: 1px solid #e7dfd7; background: #fdfaf6; color: #3d3239; font-family: inherit; font-size: 11px; outline: none; transition: border-color .2s ease, box-shadow .2s ease; }
+.wishes-lock-form input:focus { border-color: #c9a9bd; box-shadow: 0 0 0 3px #c9a9bd22; }
+.wishes-lock-form .button { min-height: 44px; }
+
+.wishes-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px max(22px, calc((100% - 940px)/2)); border-top: 1px solid #e9e1d9; color: #94878a; font-size: 8px; }
+.wishes-footer a { color: #6f5c66; }
+
+@media (max-width: 680px) {
+  .wishes-main { width: calc(100% - 32px); padding: 38px 0 56px; }
+  .wishes-panel, .wishes-board { padding: 20px 16px 22px; }
+  .wishes-panel-head { flex-wrap: wrap; }
+  .wishes-input { flex: 1 1 100%; }
+  .wishes-form-row { gap: 9px; }
+  .wishes-form-row .button { flex: 1 1 auto; }
+  .wishes-lock { margin-top: 4vh; padding: 32px 20px 36px; }
+  .wishes-lock-form { flex-direction: column; }
+  .wishes-item { padding: 14px 13px; gap: 9px; }
+}
