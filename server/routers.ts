@@ -1,10 +1,10 @@
-import { COOKIE_NAME } from "@shared/const";
+import { COOKIE_NAME } from "../shared/const.js";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
-import { getSessionCookieOptions } from "./_core/cookies";
-import { systemRouter } from "./_core/systemRouter";
-import { publicProcedure, router } from "./_core/trpc";
-import { addWish, listWishes, verifyWishesCode } from "./wishes";
+import { getSessionCookieOptions } from "./_core/cookies.js";
+import { systemRouter } from "./_core/systemRouter.js";
+import { publicProcedure, router } from "./_core/trpc.js";
+import { addWish, listWishes, verifyWishesCode } from "./wishes.js";
 
 const WISHES_CODE_ERROR = "الكود مش مظبوط، جرّب تاني.";
 const WISHES_CODE_INPUT = z.object({ code: z.string().min(1).max(120) });

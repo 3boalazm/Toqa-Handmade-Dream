@@ -4,8 +4,8 @@ import os from "node:os";
 import path from "node:path";
 import { desc } from "drizzle-orm";
 import { nanoid } from "nanoid";
-import { wishes } from "../drizzle/schema";
-import { getDb } from "./db";
+import { wishes } from "../drizzle/schema.js";
+import { getDb } from "./db.js";
 
 /**
  * Wishes left on the hidden wishes page.
